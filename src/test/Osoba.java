@@ -1,18 +1,26 @@
 package test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Osoba {
     private final String iD;
     private String nazwisko;
     private String imie;
-    private final String dataUrodzenia;
+    private final LocalDate dataUrodzenia;
     private final String pesel;
 
     public Osoba(String iD, String nazwisko, String imie, String dataUrodzenia, String pesel) {
         this.iD = iD;
         this.nazwisko = nazwisko;
         this.imie = imie;
-        this.dataUrodzenia = dataUrodzenia;
+        this.dataUrodzenia = parsowanieDaty(dataUrodzenia);
         this.pesel = pesel;
+    }
+
+    private LocalDate parsowanieDaty(String s) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
+        return LocalDate.parse(s, dtf);
     }
 
     public String getiD() {
@@ -35,16 +43,15 @@ public class Osoba {
         this.imie = imie;
     }
 
-    public String getDataUrodzenia() {
+    public LocalDate getDataUrodzenia() {
         return dataUrodzenia;
     }
+
 
     public String getPesel() {
         return pesel;
     }
-    public static void load(){
 
-    }
     @Override
     public String toString() {
         return "Osoba{" +
